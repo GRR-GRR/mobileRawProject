@@ -19,7 +19,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ChatDetailCtrl', function($scope, $+, Chats) {
+.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
   $scope.chat = Chats.get($stateParams.chatId);
   $scope.add5=function(ref) {
         $scope.chat.like += 5;
