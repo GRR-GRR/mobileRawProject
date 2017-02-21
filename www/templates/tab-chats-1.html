@@ -45,21 +45,21 @@
     </label>
   </div>
   <div class="list list-inset">
-    <h3>I have {{ chats.length }} friends</h3>
-    <p class="animate-repeat" ng-if=chats.length === 0">
-      <strong>No results found...</strong>
-    </p>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats | filter:q | orderBy:'-name'" type="item-text-wrap" href="#/tab/chats/{{chat.id}}">
-        <img ng-src="{{chat.face}}">
-        <h2>{{chat.name}}</h2>
-        <p>{{chat.lastText}}</p>
-        <i class="icon ion-chevron-right icon-accessory"></i>
-        <ion-option-button class="button-assertive" ng-click="remove(chat)">
-          Delete
-        </ion-option-button>
+    <h5>Vous avez {{ chats.length }} amis avec des têtes de con...<br/>
+    ...ou des idées de merde</h5>
+      <ion-list show-delete="true">
+        <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats | orderBy:'-name'| filter:q as results" type="item-text-wrap" href="#/tab/chats/{{chat.id}}">
+          <img ng-src="{{chat.face}}"/>
+          <h2>{{chat.name}}</h2>
+          <p>{{chat.lastText}}</p>
+          <ion-delete-button class="ion-minus-circled" ng-click="remove(chat)"></ion-delete-button>
+          <i class="icon ion-chevron-right icon-accessory"></i>
+        </ion-item>
+      </ion-list>
 
-      </ion-item>
-
+        <p class="animate-repeat" ng-if="results.length === 0">
+          <strong>C'est plutôt une bonne nouvelle !</strong>
+        </p>
   </div>
 </ion-content>
 
