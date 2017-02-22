@@ -64,11 +64,21 @@ angular.module('starter', ['ionic', 'starter.controllers01', 'starter.services01
       url: '/chats/:idUser',
       views: {
         'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
+          templateUrl: 'templates/chat-details01.html',
           controller: 'ChatDetailCtrl'
         }
       }
     })
+
+  .state('tab.map', {
+    url: '/map',
+    views: {
+      'tab-map': {
+        templateUrl: 'templates/tab-map.html',
+        controller: 'MapCtrl'
+      }
+    }
+  })
 
   .state('tab.account', {
     url: '/account',

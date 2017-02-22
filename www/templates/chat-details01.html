@@ -1,0 +1,9 @@
+<ion-view view-title="Profil">
+  <ion-content class="padding">
+    <img ng-src="{{ oneUser.avatar }}" style="width: 64px; height: 64px">
+    <h4>{{ oneUser.name }} {{ oneUser.lastname }} | Age {{ oneUser.age }} <i class="ion-thumbsup " ng-click="add5(oneUser.idUser)"> 0 {{ oneUser.like }}</i></h4>
+    <p>"{{ oneUser.motto }}"</p>
+    <p>"{{ oneUser.adress }}"</p>
+
+  </ion-content>
+</ion-view>

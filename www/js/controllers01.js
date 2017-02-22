@@ -2,6 +2,25 @@ angular.module('starter.controllers01', [])
 
 .controller('DashCtrl', function($scope) {})
 
+
+.controller('MapCtrl', function($scope, Users, ngMaps) {
+  $scope.map = {
+    center: [39, -121],
+    options: function() {
+        return {
+          streetViewControl: false,
+          scrollwheel: false
+        }
+    },
+    events: {
+      click: function(e, map) {
+        alert(e.latLng.lat() + " " + e.latLng.lng());
+      }
+    }
+  }
+})
+
+
 .controller('UsersCtrl', function($scope, Users) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -39,16 +58,22 @@ angular.module('starter.controllers01', [])
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Users) {
-  console.log($stateParams.idUser);
-
+  
+/*  console.log($stateParams.idUser);
+*/
 Users.getUsers($stateParams.idUser)
   .then(function(data){
-    console.log(data.users);
-      $scope.oneUser = Users.getUsers(data.users);
-        for (var i = data.users.length - 1; i >= 0; i--) {
-          data.users[i].idUser = $stateParams.idUser;
-          console.log($scope.onUser)
+
+/*      console.log(data.users);
+*/      console.log(data.users.length);
+
+        for (var i = 0; i < data.users.length; i++) {
+          if (data.users[i].idUser == $stateParams.idUser) {
+           $scope.oneUser = data.users[i];
+          }
         }
+  console.log($scope.oneUser);
+
   });
 
 })
@@ -58,6 +83,10 @@ Users.getUsers($stateParams.idUser)
     enableFriends: true
   }
 })
+
+
+
+
 
 //chat
 
