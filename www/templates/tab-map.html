@@ -1,12 +1,13 @@
 <ion-view view-title="Map">
   <ion-content>
-<!--     <ion-list>
-    <ion-toggle  ng-model="settings.enableFriends">
-        Enable Friends
-    </ion-toggle>
-    </ion-list> -->
-<map ng-transclude class="google-map" center="map.center" options="map.options" events="map.events">
-
-</map>
+	<ion-list>
+		<ion-toggle  ng-model="settings.enableFriends">
+		    Enable Friends
+		</ion-toggle>
+	</ion-list>
+		<map ng-transclude class='google-map' center='map.center'>
+  			<marker position='marker1.position'></marker>
+  			<marker position='marker2.position'></marker>
+  		</map>
   </ion-content>
 </ion-view>

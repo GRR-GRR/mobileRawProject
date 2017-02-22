@@ -3,21 +3,33 @@ angular.module('starter.controllers01', [])
 .controller('DashCtrl', function($scope) {})
 
 
-.controller('MapCtrl', function($scope, Users, ngMaps) {
+.controller('MapCtrl', function($scope, Users){
   $scope.map = {
-    center: [39, -121],
-    options: function() {
-        return {
-          streetViewControl: false,
-          scrollwheel: false
-        }
-    },
-    events: {
-      click: function(e, map) {
-        alert(e.latLng.lat() + " " + e.latLng.lng());
-      }
-    }
+    center: [45.2914569, 2.0399013]
   }
+
+  $scope.markers = {
+    position: [
+      [45.2914569, 2.0399013],
+      [49, 2.0399013]
+    ]   
+  }
+
+
+
+
+  $scope.marker1 = {
+    position: [45.2914569, 2.0399013]   
+  };
+  $scope.marker2 = {
+    position: [45, 2.0399013]   
+  };
+
+  Users.getUsers().then(function(data){
+    $scope.mapUsers = data.users;
+  console.log(data.users)
+  });
+
 })
 
 
