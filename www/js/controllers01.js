@@ -101,18 +101,49 @@ angular.module('starter.controllers01', [])
 
 })
 
+.controller('UserModCtrl', function($scope, $stateParams, Users) {
+
+  Users.getUsers($stateParams.userId02)
+  .then(function(data){
+
+    for (var i = 0; i < data.users.length; i++) {
+      if (data.users[i].idUser == $stateParams.userId02) {
+        $scope.oneUser = data.users[i];
+
+  $scope.formUser = {
+    prenom:$scope.oneUser.name,
+    nom:$scope.oneUser.lastname,
+    adresse:$scope.oneUser.adress,
+    motto:$scope.oneUser.motto,
+    email:$scope.oneUser.email
+  };
+
+      } 
+   }
+  });  
+
+
+
+  $scope.subFormUser = function(){
+   console.log($scope.formUser);
+  
+  };
+
+
+
+})
 .controller('ChatDetailCtrl', function($scope, $stateParams, Users) {
   
 /*  console.log($stateParams.idUser);
 */
-Users.getUsers($stateParams.idUser)
+Users.getUsers($stateParams.userId01)
   .then(function(data){
 
 /*      console.log(data.users);
 */      console.log(data.users.length);
 
         for (var i = 0; i < data.users.length; i++) {
-          if (data.users[i].idUser == $stateParams.idUser) {
+          if (data.users[i].idUser == $stateParams.userId01) {
            $scope.oneUser = data.users[i];
           }
         }
@@ -127,10 +158,6 @@ Users.getUsers($stateParams.idUser)
     enableFriends: true
   }
 })
-
-
-
-
 
 //chat
 

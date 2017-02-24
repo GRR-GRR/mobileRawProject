@@ -61,7 +61,7 @@ angular.module('starter', ['ionic', 'starter.controllers01', 'starter.services01
       }
     })
     .state('tab.chat-detail', {
-      url: '/chats/:idUser',
+      url: '/chats/:userId01',
       views: {
         'tab-chats': {
           templateUrl: 'templates/chat-details01.html',
@@ -88,9 +88,19 @@ angular.module('starter', ['ionic', 'starter.controllers01', 'starter.services01
         controller: 'AccountCtrl'
       }
     }
-  });
+  })
+
+  .state('tab.userMod', {
+  url: '/user/modifier/:userId02',
+  views: {
+    'tab-account': {
+      templateUrl: 'templates/user-form.html',
+      controller: 'UserModCtrl'
+    }
+  }
+})
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/map');
+  $urlRouterProvider.otherwise('/tab/chats');
 
 });
