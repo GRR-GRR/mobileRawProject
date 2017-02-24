@@ -101,7 +101,7 @@ angular.module('starter.controllers01', [])
 
 })
 
-.controller('UserModCtrl', function($scope, $stateParams, Users) {
+.controller('UserModCtrl', function($scope, $stateParams, $http, Users, $state, $q) {
 
   Users.getUsers($stateParams.userId02)
   .then(function(data){
@@ -110,23 +110,79 @@ angular.module('starter.controllers01', [])
       if (data.users[i].idUser == $stateParams.userId02) {
         $scope.oneUser = data.users[i];
 
-  $scope.formUser = {
-    prenom:$scope.oneUser.name,
-    nom:$scope.oneUser.lastname,
-    adresse:$scope.oneUser.adress,
-    motto:$scope.oneUser.motto,
-    email:$scope.oneUser.email
-  };
+        $scope.formUser = {
+          prenom:$scope.oneUser.name,
+          nom:$scope.oneUser.lastname,
+          adresse:$scope.oneUser.adress,
+          motto:$scope.oneUser.motto,
+          age:$scope.age,
+          email:$scope.oneUser.email,
+
+        };
 
       } 
-   }
+    }
   });  
 
-
-
   $scope.subFormUser = function(){
-   console.log($scope.formUser);
+    console.log($scope.formUser);
+
+    var adress = $scope.formUser.adresse;
+    var age = $scope.formUser.age;
+    var tel = $scope.formUser.phone;
+
+/*    var req = {
+     method: 'PUT',
+     url: 'http://carbillet.net/api-digitalGrenoble/users/',
+     headers: {
+       'Content-Type': undefined
+     },
+     data: { test: 'test' }
+    }*/
+    var log = {json:{username: "antoine.sestier", password: "antoine"}};
+
+    var deferred = $q.defer();
+    console.log(log);
+      $http.post('http://carbillet.net/api-digitalGrenoble/credentials/', log)
+      .success(function(){
+      
+      var data = {
+      "json" : {
+        "idUser": $stateParams.userId02,
+        "adress": adress,
+        "age": parseInt(age),
+        "phone": tel 
+      }
+    }
+
+    console.log(data);
+
+      $http.put('http://carbillet.net/api-digitalGrenoble/users/', data)
+        .success(function(data, status){
+          deferred.resolve(data);
+        }).error(function(data, status){
+          deferred.reject('erreur');
+        })
+      return deferred.promise;
+      })
+
+
+      
+
+
+
+
+
+ 
+
+    $state.go('tab.chat-detail', {userId01: $stateParams.userId02});
   
+    
+
+    
+
+
+
   };
 
 

@@ -23,12 +23,15 @@ angular.module('starter', ['ionic', 'starter.controllers01', 'starter.services01
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider ) {
+.config(function($stateProvider, $urlRouterProvider, $httpProvider ) {
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
+
+  $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+  $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 
   $stateProvider
 
@@ -93,7 +96,7 @@ angular.module('starter', ['ionic', 'starter.controllers01', 'starter.services01
   .state('tab.userMod', {
   url: '/user/modifier/:userId02',
   views: {
-    'tab-account': {
+    'tab-chats': {
       templateUrl: 'templates/user-form.html',
       controller: 'UserModCtrl'
     }
