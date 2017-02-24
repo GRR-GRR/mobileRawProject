@@ -2,32 +2,64 @@ angular.module('starter.controllers01', [])
 
 .controller('DashCtrl', function($scope) {})
 
-
+// Affichage des points sur une carte
 .controller('MapCtrl', function($scope, Users){
+  
+  // CENTRAGE DE LA MAP SUR DES COORDONNEES que l'on souhaite
   $scope.map = {
-    center: [45.2914569, 2.0399013]
+    center: [45.1845145, 5.7209332]
   }
 
-  $scope.markers = {
-    position: [
-      [45.2914569, 2.0399013],
-      [49, 2.0399013]
-    ]   
-  }
-
-
-
-
-  $scope.marker1 = {
-    position: [45.2914569, 2.0399013]   
-  };
-  $scope.marker2 = {
-    position: [45, 2.0399013]   
-  };
-
+  // On récupère les données des users avec le service
   Users.getUsers().then(function(data){
-    $scope.mapUsers = data.users;
-  console.log(data.users)
+
+  /*création d'un nouveau tableau pour stocker les données de que l'on va recuper pour pouvoir les parcourir ensuite*/
+    var mapUsers = new Array (); 
+    var pointName = new Array();
+
+    // boucle pour récuperer les postions
+    for (i=0; i<data.users.length; i++){
+
+/*      console.log(data.users[i].name);
+*/      pointName.push(data.users[i].name);
+      // ne recuperer et stocker dans le nouveau tableau que les positions qui ne sont pas null
+      if (data.users[i].position !== null) {
+        mapUsers.push(data.users[i].position);
+      }
+    }
+    
+/*    console.log(mapUsers);
+*/
+    var tabCoord = new Array();
+    // parcourir le nouveau tableau pour recuperer les valeur de lat et lng
+    for (var i = 0; i < mapUsers.length; i++) {
+/*      console.log(mapUsers[i]);
+*/      var coord = [mapUsers[i].lat, mapUsers[i].lng];
+        tabCoord.push(coord);
+    }
+
+    $scope.pointName = pointName;
+
+      // point.label.push(pointName)
+    console.log(pointName);
+
+    $scope.points = {
+      coords: tabCoord,
+      options: function(coords, properties, i, map) {
+        console.log("i", coords, pointName[i]);
+        return {
+          draggable: true,
+        }
+      },
+      events: {
+        click: function(e, point, map, points) {
+        }
+      },
+      decimals: 3
+    };
+
+
+
   });
 
 })
