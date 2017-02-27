@@ -1,5 +1,6 @@
 <ion-view view-title="Map">
-			<map ng-transclude class='google-map' zoom='12' center='map.center'>
-				 <points coords="points.coords" options="points.options"></points>
+			<map ng-transclude class='google-map' zoom='15' center='map.center'>
+				<marker position="current" animation="animation.BOUNCE" centered="true"></marker>
+				<points coords="points.coords" options="points.options"></points>
 			</map>
 </ion-view>

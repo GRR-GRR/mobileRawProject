@@ -3,12 +3,22 @@ angular.module('starter.controllers01', [])
 .controller('DashCtrl', function($scope) {})
 
 // Affichage des points sur une carte
-.controller('MapCtrl', function($scope, Users){
-  
-  // CENTRAGE DE LA MAP SUR DES COORDONNEES que l'on souhaite
-  $scope.map = {
-    center: [45.1845145, 5.7209332]
-  }
+.controller('MapCtrl', function($scope, Users, $cordovaGeolocation){
+  var posOptions = {timeout: 10000, enableHighAccuracy: false};
+  $cordovaGeolocation
+    .getCurrentPosition(posOptions)
+    .then(function (position) {
+      var lat  = position.coords.latitude
+      var long = position.coords.longitude
+        
+      // CENTRAGE DE LA MAP SUR DES COORDONNEES que l'on souhaite
+      $scope.map = {
+        center: [lat, long]
+      }
+    }, function(err) {
+      // error
+    });
+
 
   // On récupère les données des users avec le service
   Users.getUsers().then(function(data){

@@ -45,6 +45,7 @@
     </label>
   </div>
   <div class="list list-inset">
+    <ion-spinner class="spinner-energized" ng-show="loading" ></ion-spinner>
     <h3>Vous avez {{ viewUsers.length }} friends</h3>
     <p class="animate-repeat" ng-if="viewUsers.length <= 0">
       <strong>No results found...</strong>
