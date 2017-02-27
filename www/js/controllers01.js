@@ -10,13 +10,21 @@ angular.module('starter.controllers01', [])
     .then(function (position) {
       var lat  = position.coords.latitude
       var long = position.coords.longitude
-        
+
       // CENTRAGE DE LA MAP SUR DES COORDONNEES que l'on souhaite
       $scope.map = {
         center: [lat, long]
       }
-    }, function(err) {
-      // error
+      $scope.marker = {
+        position: [lat, long],
+        decimals: 4,
+        options: function() {
+          return { draggable: true };
+        }
+      }
+
+      }, function(err) {
+        // error
     });
 
 
@@ -58,7 +66,7 @@ angular.module('starter.controllers01', [])
       options: function(coords, properties, i, map) {
         console.log("i", coords, pointName[i]);
         return {
-          draggable: true,
+          draggable: false,
         }
       },
       events: {
