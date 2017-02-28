@@ -13,37 +13,28 @@ angular.module('starter.controllers01', [])
         return angular.isDefined($scope.step3.something);
     };
 
-/*    for (var i = 0; i < $scope.step1.length; i++) {
-      var key1 = $scope.step1.data[i]
-    };
+    $scope.subMyCollection = function(){
 
-    for (var i = 0; i < $scope.step2.length; i++) {
-      var key2 = $scope.step2.data[i]
-    };
+      var key1 = $scope.step1.something
+      var key2 = $scope.step2.name
+      var key3 = $scope.step3.something
 
-    for (var i = 0; i < $scope.step3.length; i++) {
-      var key3 = $scope.step3.something[i]
-    };*/
+      $http({
+        method: 'GET',
+        url: 'http://api.giphy.com/v1/gifs/search?q='+key1+'+'+key2+'&api_key=dc6zaTOxFJmzC'
+        }).then(function successCallback(response) {
 
-      var key2 = $scope.step2
-
-      $scope.subMyCollection = function(){
-
-        $http({
-          method: 'GET',
-          url: 'http://api.giphy.com/v1/gifs/search?q='+key2+'&api_key=dc6zaTOxFJmzC'
-          }).then(function successCallback(response) {
-
-            console.log(response.data, key2);
-
-          }, function errorCallback(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-        });
-      }
+          console.log(response.data, key1, key2, key3);
 
 
+          $scope.collection = response.data.data;
+          
 
+        }, function errorCallback(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+      });
+    }
 
 })
 
@@ -133,26 +124,7 @@ angular.module('starter.controllers01', [])
 
 
 .controller('UsersCtrl', function($scope, Users) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-/*  $scope.users = [
-    {name:'John', age:25, gender:'boy'},
-    {name:'Jessie', age:30, gender:'girl'},
-    {name:'Johanna', age:28, gender:'girl'},
-    {name:'Joy', age:15, gender:'girl'},
-    {name:'Mary', age:28, gender:'girl'},
-    {name:'Peter', age:95, gender:'boy'},
-    {name:'Sebastian', age:50, gender:'boy'},
-    {name:'Erika', age:27, gender:'girl'},
-    {name:'Patrick', age:40, gender:'boy'},
-    {name:'Samantha', age:60, gender:'girl'}
-  ];*/
-  
+
   Users.getUsers().then(function(data){
     $scope.viewUsers = data.users;
   });
@@ -233,21 +205,8 @@ angular.module('starter.controllers01', [])
       return deferred.promise;
       })
 
-
-      
-
-
-
-
-
- 
-
     $state.go('tab.chat-detail', {userId01: $stateParams.userId02});
   
-    
-
-    
-
 
 
   };
@@ -283,6 +242,19 @@ Users.getUsers($stateParams.userId01)
 })
 
 //chat
+.controller('ValidationCtrl', function($scope) {
+
+$scope.myComp={};
+
+    $scope.validateMyComp = function (){
+
+      var formNom = $scope.myComp.name;
+      var formPrenom = $scope.myComp.lastname;
+
+      console.log(formNom, formPrenom);
+
+    }
+})
 
 .controller('ChatLike', function ($scope , Chats) {
 

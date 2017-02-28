@@ -142,8 +142,8 @@
                             <input type="text" placeholder="Type something" ng-model="step3.something" autocomplete="off">
                         </label>
                     </div>
-                    <h3 ng-show="step3.something">You can now launch the app using the button above!</h3>
-                    <ion-item ng-repeat="img in collection"><img src="{{img}}"></ion-item>
+                    <h3 ng-show="step3.something">You can now launch the app using the button above! {{ $scope.step3 }}</h3>
+                    <ion-item ng-repeat="img in collection"><img src="{{ img['images']['downsized_large']['url'] }}"></ion-item>
                 </div>
             </div>
         </ion-slide-page>

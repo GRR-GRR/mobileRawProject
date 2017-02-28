@@ -1,9 +1,15 @@
-<ion-view view-title="Account">
-  <ion-content>
-    <ion-list>
-    <ion-toggle  ng-model="settings.enableFriends">
-        Enable Friends
-    </ion-toggle>
-    </ion-list>
+<ion-view view-title="Essai">
+  <ion-content class="padding">
+	<div class="list list-inset">
+		<label class="item item-input">
+			<input type="text" placeholder="First Name" ng-model="myComp.name">
+		</label>
+		<label class="item item-input">
+			<input type="text" placeholder="Last Name" ng-model="myComp.lastname">
+		</label>
+	  	<button type="submit" class="button button-energized" ng-click="validateMyComp()">
+		  button-energized
+		</button>
+	</div>
   </ion-content>
 </ion-view>
