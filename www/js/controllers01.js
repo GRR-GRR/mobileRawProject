@@ -1,6 +1,52 @@
 angular.module('starter.controllers01', [])
 
-.controller('DashCtrl', function($scope) {})
+.controller('DashCtrl', function($scope, $state, $http, $q) {
+    $scope.step1 = {};
+    $scope.step2 = {};
+    $scope.step3 = {};
+
+    $scope.start = function() {
+        $state.go('tab.dash');
+    };
+
+    $scope.startCondition = function() {
+        return angular.isDefined($scope.step3.something);
+    };
+
+/*    for (var i = 0; i < $scope.step1.length; i++) {
+      var key1 = $scope.step1.data[i]
+    };
+
+    for (var i = 0; i < $scope.step2.length; i++) {
+      var key2 = $scope.step2.data[i]
+    };
+
+    for (var i = 0; i < $scope.step3.length; i++) {
+      var key3 = $scope.step3.something[i]
+    };*/
+
+      var key2 = $scope.step2
+
+      $scope.subMyCollection = function(){
+
+        $http({
+          method: 'GET',
+          url: 'http://api.giphy.com/v1/gifs/search?q='+key2+'&api_key=dc6zaTOxFJmzC'
+          }).then(function successCallback(response) {
+
+            console.log(response.data, key2);
+
+          }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
+      }
+
+
+
+
+})
+
 
 // Affichage des points sur une carte
 .controller('MapCtrl', function($scope, Users, $cordovaGeolocation){
@@ -19,9 +65,11 @@ angular.module('starter.controllers01', [])
         position: [lat, long],
         decimals: 4,
         options: function() {
-          return { draggable: true };
+          return { draggable: true};
         }
       }
+
+      console.log($scope.marker);
 
       }, function(err) {
         // error
@@ -59,7 +107,8 @@ angular.module('starter.controllers01', [])
     $scope.pointName = pointName;
 
       // point.label.push(pointName)
-    console.log(pointName);
+/*    console.log(pointName);
+*/
 
     $scope.points = {
       coords: tabCoord,

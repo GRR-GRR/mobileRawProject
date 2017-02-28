@@ -1,17 +1,152 @@
 <ion-view view-title="Dashboard">
-  <ion-content class="padding">
-    <h2>Welcome to Ionic</h2>
-    <p>
-    This is the Ionic starter for tabs-based apps. For other starters and ready-made templates, check out the <a href="http://market.ionic.io/starters" target="_blank">Ionic Market</a>.
-    </p>
-    <p>
-      To edit the content of each tab, edit the corresponding template file in <code>www/templates/</code>. This template is <code>www/templates/tab-dash.html</code>
-    </p>
-    <p>
-    If you need help with your app, join the Ionic Community on the <a href="http://forum.ionicframework.com" target="_blank">Ionic Forum</a>. Make sure to <a href="http://twitter.com/ionicframework" target="_blank">follow us</a> on Twitter to get important updates and announcements for Ionic developers.
-    </p>
-    <p>
-      For help sending push notifications, join the <a href="https://apps.ionic.io/signup" target="_blank">Ionic Platform</a> and check out <a href="http://docs.ionic.io/docs/push-overview" target="_blank">Ionic Push</a>. We also have other services available.
-    </p>
-  </ion-content>
+    <ion-nav-buttons side="left">
+        <button class="button button-light"
+                ng-click="start()">
+            Skip wizard
+        </button>
+        <button class="button button-light" ion-wizard-previous>
+            Back
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button button-light" ion-wizard-next>
+            Next
+        </button>
+        <button class="button button-light" ion-wizard-start="start()" ng-click="subMyCollection()" condition="startCondition()">
+            Lancez la collection
+        </button>
+    </ion-nav-buttons>
+    <ion-slides options="swiperOptions" slider="swiper" ion-wizard>
+        <ion-slide-page ion-wizard-step next-condition="step1.something">
+            <ion-content class="has-header">
+            <div class="row">
+                <div class="col col-center">
+                    <div class="card rounded">
+                        <div class="item">
+                            <h2 class="positive">Thanks for trying out this wizard!</h2>
+                        </div>
+                        <div class="item item-text-wrap">
+                            <input type="text" placeholder="Type something" ng-model="step1.something" autocomplete="on">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-center">
+                    <div class="card rounded">
+                        <div class="item">
+                            <h2 class="positive">This slide is scrollable</h2>
+                        </div>
+                        <div class="item item-text-wrap">
+                            <p>
+                                Click the buttons above
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!--             <div class="row">
+                <div class="col col-center">
+                    <div class="card rounded">
+                        <div class="item">
+                            <h2 class="positive">This slide is scrollable</h2>
+                        </div>
+                        <div class="item item-text-wrap">
+                            <p>
+                                Click the buttons above
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-center">
+                    <div class="card rounded">
+                        <div class="item">
+                            <h2 class="positive">This slide is scrollable</h2>
+                        </div>
+                        <div class="item item-text-wrap">
+                            <p>
+                                Click the buttons above
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            </ion-content>
+        </ion-slide-page>
+        <ion-slide-page ion-wizard-step next-condition="step2.name" prev-condition="!step2.name">
+            <ion-content class="has-header">
+            <div class="row">
+                <div class="col col-center">
+                    <div class="item item-input-inset">
+                        <label class="item item-input-wrapper">
+                            <i class="icon ion-search placeholder-icon"></i>
+                            <input type="text" placeholder="Type something" ng-model="step2.name" autocomplete="off">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-center">
+                    <div class="card rounded" ng-hide="step2.name">
+                        <div class="item">
+                            <h2 class="positive">The next button has been disabled until the input is filled</h2>
+                        </div>
+                    </div>
+                    <div class="card rounded" ng-show="step2.name">
+                        <div class="item">
+                            <h2 class="positive">Now you can move on! Click on the next button. The previous button has now been disabled</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-center">
+                    <div class="card rounded">
+                        <div class="item">
+                            <h2 class="positive">This slide is scrollable</h2>
+                        </div>
+                        <div class="item item-text-wrap">
+                            <p>
+                                Click the buttons above
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-center">
+                    <div class="card rounded">
+                        <div class="item">
+                            <h2 class="positive">This slide is scrollable</h2>
+                        </div>
+                        <div class="item item-text-wrap">
+                            <p>
+                                Click the buttons above
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </ion-content>
+        </ion-slide-page>
+        <ion-slide-page ion-wizard-step class="has-header">
+            <div class="row">
+                <div class="col col-center">
+                    <h3 class="positive">Thanks for running the wizard!</h3>
+                    <p>As a last step please fill in the field below</p>
+                    <div class="item item-input-inset">
+                        <label class="item item-input-wrapper">
+                            <i class="icon ion-search placeholder-icon"></i>
+                            <input type="text" placeholder="Type something" ng-model="step3.something" autocomplete="off">
+                        </label>
+                    </div>
+                    <h3 ng-show="step3.something">You can now launch the app using the button above!</h3>
+                    <ion-item ng-repeat="img in collection"><img src="{{img}}"></ion-item>
+                </div>
+            </div>
+        </ion-slide-page>
+    </ion-slides>
+
 </ion-view>

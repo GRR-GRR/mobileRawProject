@@ -3,9 +3,8 @@ angular.module('starter.services01', [])
 
 
 .factory('Users', function($http, $q) {
-  // Might use a resource here that returns a JSON array
-  // Some fake testing data
-  var allUsers = {
+
+  return {
     getUsers : function(){
       var deferred = $q.defer();
 /*      $scope.loading = true;
